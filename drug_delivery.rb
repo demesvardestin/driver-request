@@ -5,7 +5,9 @@ class Pharmacy
   
   def set_pharmacy_details(pharmacy=[])
     @pharmacy = pharmacy
-    sample_names = ["CVS", "Walgreens", "Rite-Aid", "Medicine Cabinet Pharmacy", "Parsons Pharmacy", "Valley Stream Pharmacy"]
+    sample_names = ["CVS", "Walgreens", "Rite-Aid", "Medicine Cabinet Pharmacy", 
+                    "Parsons Pharmacy", "Valley Stream Pharmacy", "Duane Reade",
+                    "Publix", "Express Scripts", "Bartell Drugs"]
     @pharmacy = {
       "name" => sample_names[rand(0..sample_names.length-1)],
       "zip" => rand(11000..11600)
@@ -110,7 +112,6 @@ class ProcessPatient < Pharmacy
   
   def logic_flow(patients, pharmacy=@pharmacy)
     counter = 0
-    start = 0
     charges = []
     request_response = []
     accepted_requests = []
@@ -129,7 +130,6 @@ class ProcessPatient < Pharmacy
             end
           end
         }
-        start = counter
       end
     }
     return self.format_response(charges.flatten, accepted_requests, pharmacy["name"])
@@ -143,7 +143,9 @@ class ProcessPatient < Pharmacy
     while i < accepted_requests.length
       pharmacy_charges[i] == 35 ? charge = pharmacy_charges[i] : charge = pharmacy_charges[i + 1]
       pharmacy_charges[i + 1] != 35 ? surcharge = pharmacy_charges[i + 1] : surcharge = 0
-      output_line = "There is a charge of #{charge} for #{pharmacy_name}, and a surcharge of #{surcharge}. Driver #{accepted_requests[i]["driver"]["name"]} is on the way to pick up package ##{accepted_requests[i]["package"]}. \n"
+      output_line = "There is a charge of #{charge} for #{pharmacy_name}, and a 
+                    surcharge of #{surcharge}. Driver #{accepted_requests[i]["driver"]["name"]} 
+                    is on the way to pick up package ##{accepted_requests[i]["package"]}. \n"
       charge = nil
       surcharge = nil
       print output_line
