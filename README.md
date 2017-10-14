@@ -1,7 +1,10 @@
 I've recently begun to code in ruby, so I've been trying to hone my skills a bit. 
 This is a very basic implementation (or my idea of an implementation) of a 
-pharmacy-to-driver request for prescription delivery. I'll be actively trying to 
-make it better as I learn more.
+pharmacy-to-driver request for prescription delivery. The program takes in a certain 
+number of patients for which it creates some prescriptions. It will then send 
+out requests for drivers in the area to come pick up the medications. It will 
+output the charge, surcharge, driver name and package number for every accepted 
+request. I'll be actively trying to improve the code and its objectives as I learn more.
 
 To try it out:
 
@@ -14,17 +17,16 @@ Ex:
 
 patients = Patient.new.create_amt(20)
 process = ProcessPatient.new.logic_flow(patients)
-puts process
 
-##This would return the following:
-##[[35, 35], [{"driver"=>{"name"=>"driver48", "zip"=>10438}, "response"=>"Request declined"}, {"driver"=>{"name"=>"driver48", "zip"=>10818}, "response"=>"Request accepted"}]]
+##Would return:
+##There is a charge of 35 for Valley Stream Pharmacy, and a surcharge of 16.8. Driver John Doe 43 is on the way to pick up package #40. There is a charge of 35 for Valley Stream Pharmacy, and a surcharge of 0. Driver John Doe 43 is on the way to pick up package #40. Total charges are 86.8.
 
 
 Note: I set up some arbitrary numbers like 35 ($35), which is the amount a 
 pharmacy gets charged for every 10 patients processed. 10 is the set amount of 
-prescriptions that a driver picks up from a pharmacy to deliver.
+prescriptions in a single package. A surcharge is the amount charged for every 
+mile that exceeds the delivery distance radius.
 
-The final values that get returned are the charges, and an array of hashes 
-containing the driver's name and their response to the request.
+Your feedback is appreciated.
 
 
